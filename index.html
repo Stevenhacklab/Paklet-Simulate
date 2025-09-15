@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Entry with Menu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 40px;
+      background: #f2f2f2;
+    }
+    #login, #menu, .page {
+      display: none;
+    }
+    #login {
+      display: block;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .page {
+      margin-top: 20px;
+    }
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <!-- Code entry -->
+  <div id="login">
+    <h2>Enter Access Code</h2>
+    <input type="password" id="accessCode" placeholder="Enter code">
+    <button onclick="checkCode()">Enter</button>
+    <p id="error" style="color:red;"></p>
+  </div>
+
+  <!-- Menu -->
+  <div id="menu">
+    <h2>Menu</h2>
+    <button onclick="showPage('page1')">Go to Page 1</button>
+    <button onclick="showPage('page2')">Go to Page 2</button>
+    <button onclick="showPage('page3')">Go to Page 3</button>
+  </div>
+
+  <!-- Pages -->
+  <div id="page1" class="page">
+    <h1>This is Page 1</h1>
+    <a href="#" onclick="backToMenu()">Back to Menu</a>
+  </div>
+
+  <div id="page2" class="page">
+    <h1>This is Page 2</h1>
+    <a href="#" onclick="backToMenu()">Back to Menu</a>
+  </div>
+
+  <div id="page3" class="page">
+    <h1>This is Page 3</h1>
+    <a href="#" onclick="backToMenu()">Back to Menu</a>
+  </div>
+
+  <script>
+    function checkCode() {
+      const code = document.getElementById("accessCode").value;
+      const correctCode = "1234"; // change this to your desired code
+      if (code === correctCode) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("menu").style.display = "block";
+      } else {
+        document.getElementById("error").innerText = "Wrong code!";
+      }
+    }
+
+    function showPage(pageId) {
+      document.getElementById("menu").style.display = "none";
+      document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+      document.getElementById(pageId).style.display = "block";
+    }
+
+    function backToMenu() {
+      document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+      document.getElementById("menu").style.display = "block";
+    }
+  </script>
+</body>
+</html>
