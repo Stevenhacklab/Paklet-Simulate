@@ -3,26 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Access + Garden Menu</title>
+  <title>Garden Menu Unlock</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-    }
-
-    /* Shared container style */
-    .container {
-      background-color: white;
-      padding: 30px 40px;
-      border-radius: 12px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-      text-align: center;
-      max-width: 90%;
-      margin: auto;
-    }
-
-    /* Access Code Page */
-    #codePage {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -30,12 +15,21 @@
       background: linear-gradient(to right, #6a0dad, #32cd32); /* Purple to Green gradient */
     }
 
-    #codePage h2 {
+    .container {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      text-align: center;
+      max-width: 90%;
+    }
+
+    h2 {
       margin-bottom: 20px;
       color: #333;
     }
 
-    #codePage input {
+    input {
       padding: 10px;
       width: 80%;
       border: 1px solid #ccc;
@@ -44,7 +38,7 @@
       margin-bottom: 15px;
     }
 
-    #codePage button {
+    button {
       padding: 10px 20px;
       font-size: 16px;
       background-color: #4CAF50;
@@ -52,9 +46,10 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
+      margin-top: 10px;
     }
 
-    #codePage button:hover {
+    button:hover {
       background-color: #45a049;
     }
 
@@ -72,69 +67,54 @@
       color: red;
     }
 
-    /* Garden Menu Page */
-    #gardenPage {
-      display: none; /* hidden by default */
+    /* Garden Menu styling */
+    #gardenMenu {
+      display: none; /* hidden until code is correct */
+      background: linear-gradient(to right, #00b4db, #0083b0); /* Blue gradient */
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: linear-gradient(to right, #00b4db, #0083b0); /* Blue gradient */
     }
 
-    #gardenPage h2 {
-      margin-bottom: 20px;
+    #gardenMenu .container {
+      background-color: white;
+    }
+
+    #gardenMenu h2 {
       color: #333;
-    }
-
-    #gardenPage button {
-      padding: 12px 24px;
-      font-size: 16px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 15px;
-    }
-
-    #gardenPage button:hover {
-      background-color: #45a049;
     }
   </style>
 </head>
 <body>
-  <!-- ACCESS CODE PAGE -->
-  <div id="codePage">
-    <div class="container">
-      <h2>Enter Access Code</h2>
-      <input type="text" id="codeInput" placeholder="Enter code" />
-      <br />
-      <button onclick="checkCode()">Submit</button>
-      <p id="message"></p>
-    </div>
+  <!-- CODE ENTRY SECTION -->
+  <div id="codeSection" class="container">
+    <h2>Enter Access Code</h2>
+    <input type="text" id="codeInput" placeholder="Enter code" />
+    <br />
+    <button onclick="checkCode()">Submit</button>
+    <p id="message"></p>
   </div>
 
-  <!-- GARDEN MENU PAGE -->
-  <div id="gardenPage">
-    <div class="container">
-      <h2>Grow A Garden Pack</h2>
-      <button onclick="window.location.href='https://sites.google.com/view/paklets/blueberry'">
-        Blueberry Seed
-      </button>
-    </div>
+  <!-- GARDEN MENU SECTION -->
+  <div id="gardenMenu" class="container">
+    <h2>Grow A Garden Pack</h2>
+    <button onclick="window.location.href='https://sites.google.com/view/paklets/blueberry'">
+      Blueberry Seed
+    </button>
   </div>
 
   <script>
     function checkCode() {
       const code = document.getElementById('codeInput').value;
       const message = document.getElementById('message');
-
-      if (code === '39138') {
+      if (code === '39138') { // correct code
         message.textContent = 'Access Granted';
         message.className = 'granted';
+        // hide code entry, show menu
         setTimeout(() => {
-          document.getElementById("codePage").style.display = "none";
-          document.getElementById("gardenPage").style.display = "flex";
+          document.getElementById('codeSection').style.display = 'none';
+          document.getElementById('gardenMenu').style.display = 'flex';
         }, 800);
       } else {
         message.textContent = 'Access Denied';
