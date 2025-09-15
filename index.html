@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Garden + Access Code</title>
+  <title>Access + Garden Menu</title>
   <style>
     body {
       margin: 0;
@@ -21,38 +21,9 @@
       margin: auto;
     }
 
-    /* Garden Pack Page */
-    #gardenPage {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: linear-gradient(to right, #00b4db, #0083b0); /* Blue gradient */
-    }
-
-    #gardenPage h2 {
-      margin-bottom: 20px;
-      color: #333;
-    }
-
-    #gardenPage button {
-      padding: 12px 24px;
-      font-size: 16px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 15px;
-    }
-
-    #gardenPage button:hover {
-      background-color: #45a049;
-    }
-
     /* Access Code Page */
     #codePage {
-      display: none; /* hidden by default */
+      display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -100,21 +71,38 @@
     .denied {
       color: red;
     }
+
+    /* Garden Menu Page */
+    #gardenPage {
+      display: none; /* hidden by default */
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to right, #00b4db, #0083b0); /* Blue gradient */
+    }
+
+    #gardenPage h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    #gardenPage button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    #gardenPage button:hover {
+      background-color: #45a049;
+    }
   </style>
 </head>
 <body>
-  <!-- GARDEN PACK PAGE -->
-  <div id="gardenPage">
-    <div class="container">
-      <h2>Grow A Garden Pack</h2>
-      <button onclick="window.location.href='https://sites.google.com/view/paklets/blueberry'">
-        Blueberry Seed
-      </button>
-      <br><br>
-      <button onclick="goToCodePage()">Enter Access Code</button>
-    </div>
-  </div>
-
   <!-- ACCESS CODE PAGE -->
   <div id="codePage">
     <div class="container">
@@ -123,22 +111,20 @@
       <br />
       <button onclick="checkCode()">Submit</button>
       <p id="message"></p>
-      <br />
-      <button onclick="goToGardenPage()">Back to Garden Pack</button>
+    </div>
+  </div>
+
+  <!-- GARDEN MENU PAGE -->
+  <div id="gardenPage">
+    <div class="container">
+      <h2>Grow A Garden Pack</h2>
+      <button onclick="window.location.href='https://sites.google.com/view/paklets/blueberry'">
+        Blueberry Seed
+      </button>
     </div>
   </div>
 
   <script>
-    function goToCodePage() {
-      document.getElementById("gardenPage").style.display = "none";
-      document.getElementById("codePage").style.display = "flex";
-    }
-
-    function goToGardenPage() {
-      document.getElementById("codePage").style.display = "none";
-      document.getElementById("gardenPage").style.display = "flex";
-    }
-
     function checkCode() {
       const code = document.getElementById('codeInput').value;
       const message = document.getElementById('message');
@@ -147,8 +133,9 @@
         message.textContent = 'Access Granted';
         message.className = 'granted';
         setTimeout(() => {
-          window.location.href = 'https://sites.google.com/view/paklets/work/qr';
-        }, 1000);
+          document.getElementById("codePage").style.display = "none";
+          document.getElementById("gardenPage").style.display = "flex";
+        }, 800);
       } else {
         message.textContent = 'Access Denied';
         message.className = 'denied';
