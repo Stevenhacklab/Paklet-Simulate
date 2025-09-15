@@ -22,6 +22,8 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.3);
       text-align: center;
       max-width: 90%;
+      max-height: 80vh; /* Limit height */
+      overflow-y: auto; /* Enable vertical scroll */
     }
 
     h2 {
@@ -47,6 +49,10 @@
       border-radius: 6px;
       cursor: pointer;
       margin-top: 10px;
+      display: block;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     button:hover {
@@ -99,9 +105,15 @@
   <!-- GARDEN MENU SECTION -->
   <div id="gardenMenu" class="container">
     <h2>Grow A Garden Pack</h2>
-    <button onclick="window.location.href='https://sites.google.com/view/paklets/blueberry'">
-      Blueberry Seed
-    </button>
+    <button onclick="window.location.href='https://sites.google.com/view/paklets/carrot'">Carrot</button>
+    <button onclick="window.location.href='https://sites.google.com/view/paklets/blueberry'">Blueberry Seed</button>
+    <button onclick="window.location.href='https://sites.google.com/view/paklets/daffodil'">Daffodil</button>
+    <button onclick="window.location.href='https://sites.google.com/view/paklets/bamboo'">Bamboo</button>
+    <button onclick="window.location.href='https://sites.google.com/view/paklets/dragon-fruit'">Dragon Fruit</button>
+    <button onclick="window.location.href='https://sites.google.com/view/paklets/mushroom'">Mushroom</button>
+    <button onclick="window.location.href='https://sites.google.com/view/paklets/ember-lily'">Ember Lily</button>
+    <button onclick="window.location.href='https://sites.google.com/view/paklets/burning-bud'">Burning Bud</button>
+    <button onclick="window.location.href='https://sites.google.com/view/paklets/bone-blossom'">Bone Blossom</button>
   </div>
 
   <script>
