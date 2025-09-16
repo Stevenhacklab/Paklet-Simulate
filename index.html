@@ -12,7 +12,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: linear-gradient(to right, #00e1ff, #00e1ff); /* Blue gradient */
+      background: linear-gradient(to right, #00e1ff, #00e1ff);
     }
 
     .container {
@@ -22,8 +22,8 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.3);
       text-align: center;
       max-width: 90%;
-      max-height: 80vh; /* Limit height */
-      overflow-y: auto; /* Enable vertical scroll */
+      max-height: 80vh;
+      overflow-y: auto;
     }
 
     h2 {
@@ -80,7 +80,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: linear-gradient(to right, #00b4db, #0083b0); /* Blue gradient */
+      background: linear-gradient(to right, #00b4db, #0083b0);
     }
 
     #gardenMenu .container {
@@ -117,22 +117,44 @@
   </div>
 
   <script>
-    function checkCode() {
+    async function checkCode() {
       const code = document.getElementById('codeInput').value;
       const message = document.getElementById('message');
-      if (code === '7888') { // correct code
-        message.textContent = 'Access Granted';
-        message.className = 'granted';
-        // hide code entry, show menu
-        setTimeout(() => {
-          document.getElementById('codeSection').style.display = 'none';
-          document.getElementById('gardenMenu').style.display = 'flex';
-        }, 800);
-      } else {
-        message.textContent = 'Access Denied';
-        message.className = 'denied';
+
+      // Send request to Google Apps Script
+      try {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbyMc2A5agaFuTQr3LpWtAey9FWUQacLgZJmjoymGdXvFqG_bJP9JdQugNdUz0YVyivr/exec", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: new URLSearchParams({ code: code })
+        });
+
+        const resultText = await response.text();
+
+        if (resultText.trim() === "success") {
+          message.textContent = "Access Granted";
+          message.className = "granted";
+
+          setTimeout(() => {
+            document.getElementById('codeSection').style.display = 'none';
+            document.getElementById('gardenMenu').style.display = 'flex';
+          }, 800);
+
+        } else {
+          message.textContent = "Access Denied";
+          message.className = "denied";
+        }
+
+      } catch (err) {
+        console.error("Error contacting script:", err);
+        message.textContent = "Error — try again later.";
+        message.className = "denied";
       }
+
     }
   </script>
 </body>
 </html>
+
